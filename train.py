@@ -33,14 +33,11 @@ def train():
         batch_size=BATCH_SIZE,
         subset='validation',
     )
-    print('shh', train_generator.__len__())
+
     classifier.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     classifier.fit_generator(train_generator,
                              validation_data=validation_generator,
                              epochs=64)
-
-
-
 
 if __name__ == '__main__':
     train()

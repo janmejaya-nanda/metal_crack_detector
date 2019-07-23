@@ -16,6 +16,8 @@ def build_model():
                           input_shape=(RESIZE_DIMENSION[1], RESIZE_DIMENSION[0], 1),
                           kernel_initializer=VarianceScaling(scale=2.0),))
     model.add(Dropout(0.5))
+
+    # Second convolutional layer
     model.add(Conv2D(25, 5, strides=(4, 4),
                      padding='valid',
                      activation='relu',
@@ -23,6 +25,7 @@ def build_model():
                      kernel_initializer=VarianceScaling(scale=2.0), ))
     model.add(Dropout(0.5))
 
+    # Third convolutional layer
     model.add(Conv2D(30, 4, strides=(2, 2),
                      padding='valid',
                      activation='relu',
@@ -30,14 +33,14 @@ def build_model():
                      kernel_initializer=VarianceScaling(scale=2.0), ))
     model.add(Dropout(0.5))
 
-    # Second convolutional layer
+    # Fourth convolutional layer
     model.add(Conv2D(40, 4, strides=(2, 2),
                           padding='valid',
                           activation='relu',
                           kernel_initializer=VarianceScaling(scale=2.0),))
     model.add(Dropout(0.5))
 
-    # Third convolutional layer
+    # Fifth convolutional layer
     model.add(Conv2D(64, 3, strides=(1, 1),
                           padding='valid',
                           activation='relu',

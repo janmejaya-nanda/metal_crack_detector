@@ -1,14 +1,8 @@
 import os
-from PIL import Image
-from PIL import ImageEnhance
 
 import numpy as np
 import cv2
-from skimage import color
-from skimage import io
-from skimage.feature import hog
 import matplotlib.pyplot as plt
-from skimage import feature
 
 from parameters import RESIZE_DIMENSION
 
@@ -34,8 +28,6 @@ def pre_processing(data_path):
     gray = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
     sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=5, scale=2)
     sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=5, scale=2)
-    plt.imshow(sobelx)
-    plt.show()
 
     return sobelx[..., np.newaxis], sobely[..., np.newaxis]
 
@@ -48,8 +40,6 @@ def get_preprocessed_data():
         if data.size != 0 and target.size != 0:
             data = np.concatenate((data, grad_x[np.newaxis, ...], grad_y[np.newaxis, ...]), axis=0)
             target = np.append(target, [1, 1])
-            # import pdb
-            # pdb.set_trace()
         else:
             data = np.concatenate((grad_x[np.newaxis, ...], grad_y[np.newaxis, ...]), axis=0)
             target = np.array([1, 1])
@@ -60,8 +50,3 @@ def get_preprocessed_data():
         target = np.append(target, [0, 0])
 
     return {'data': data, 'target': target}
-
-
-
-if __name__ == '__main__':
-    get_preprocessed_data()
